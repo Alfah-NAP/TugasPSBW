@@ -1,0 +1,133 @@
+<html>
+<head>
+  <link rel="stylesheet" href="Tugas1.css">
+</head>
+<body>
+
+<h2>Menghitung Nilai Akhir Mahasiswa</h2>
+
+<div class="form-container">
+  <label for="nim">NIM:</label>
+  <input type="text" id="nim" name="nim" value="1482300087">
+
+  <label for="nama">Nama Mahasiswa:</label>
+  <input type="text" id="nama" name="nama" value="Nepta Ardana">
+
+  <label for="tugas">Tugas:</label>
+  <input type="text" id="tugas" name="tugas" value="90">
+
+  <label for="quiz">Quiz:</label>
+  <input type="text" id="quiz" name="quiz" value="95">
+
+  <label for="uts">UTS:</label>
+  <input type="text" id="uts" name="uts" value="90">
+
+  <label for="uas">UAS:</label>
+  <input type="text" id="uas" name="uas" value="95">
+
+  <label for="nilai">Nilai Akhir:</label>
+  <input type="text" id="nilai" name="nilai" value="93">
+
+  <label for="grade">Grade:</label>
+  <input type="text" id="grade" name="grade" value="A">
+
+  <button class="proses-button" onclick="proses()">Proses</button>
+</div>
+
+<table>
+  <tr>
+    <th>NIM</th>
+    <th>Nama</th>
+    <th>Tugas</th>
+    <th>Quiz</th>
+    <th>UTS</th>
+    <th>UAS</th>
+    <th>Nilai akhir</th>
+    <th>Grade</th>
+  </tr>
+  <tr>
+    <td>001</td>
+    <td>Burhan</td>
+    <td>90</td>
+    <td>85</td>
+    <td>75</td>
+    <td>80</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>002</td>
+    <td>Yanto</td>
+    <td>85</td>
+    <td>75</td>
+    <td>60</td>
+    <td>70</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>003</td>
+    <td>Putra</td>
+    <td>90</td>
+    <td>70</td>
+    <td>80</td>
+    <td>85</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>004</td>
+    <td>Donny</td>
+    <td>90</td>
+    <td>80</td>
+    <td>75</td>
+    <td>70</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>005</td>
+    <td>Linda</td>
+    <td>80</td>
+    <td>85</td>
+    <td>90</td>
+    <td>80</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<p>Nilai akhir = (0.2*Tugas)+(0.2*Quiz)+(0.3*UTS)+(0.3*UAS)</p>
+<p>A - NA > 90 C - NA > 75 E - NA > 45</p>
+<p>B - NA > 85 D - NA > 60 F - NA > 40</p>
+
+<script>
+function proses() {
+  var tugas = document.getElementById("tugas").value;
+  var quiz = document.getElementById("quiz").value;
+  var uts = document.getElementById("uts").value;
+  var uas = document.getElementById("uas").value;
+
+  var nilaiAkhir = (0.2 * parseFloat(tugas)) + (0.2 * parseFloat(quiz)) + (0.3 * parseFloat(uts)) + (0.3 * parseFloat(uas));
+
+  document.getElementById("nilai").value = nilaiAkhir.toFixed(2);
+
+  var grade;
+  if (nilaiAkhir >= 85) {
+    grade = "A";
+  } else if (nilaiAkhir >= 70) {
+    grade = "B";
+  } else if (nilaiAkhir >= 60) {
+    grade = "C";
+  } else if (nilaiAkhir >= 40) {
+    grade = "D";
+  } else {
+    grade = "E";
+  }
+
+  document.getElementById("grade").value = grade;
+}
+</script>
+
+</body>
+</html>
