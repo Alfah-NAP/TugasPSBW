@@ -1,0 +1,20 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f8; /* Light blue-gray for a modern touch */
+}
+
+.about {
+  background-color: #ffffff; /* White background for the about section */
+  color: #333; /* Dark text for contrast */
+}
+
+.details {
+  background-color: #ffffff; /* White background for the details section */
+  color: #333; /* Dark text for contrast */
+}
+
+h2 {
+  color: #007bff; /* Bootstrap primary color for headings */
+}
