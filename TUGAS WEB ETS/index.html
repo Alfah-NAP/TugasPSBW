@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pariwisata Indonesia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Keindahan Wisata Indonesia</h2>
+
+    <header style="background-image: url('images/header-background.jpg'); background-size: cover; background-position: center; color: white; padding: 100px 0; text-align: center;">
+        <img src="https://1.bp.blogspot.com/-yYufGZnSsLQ/Xs9xw_xWGcI/AAAAAAAAAC8/EBh45ziTQNwvjhZNXI96NXs-fFvU2UoZQCLcBGAsYHQ/s1600/cropped-wtf1.png" alt="Keindahan Alam Indonesia" width="900">
+        <h1>Pariwisata Indonesia</h1>
+        <p>Menjelajahi Keindahan Nusantara</p>
+    </header>
+
+    <section class="form-section">
+        <h2>Form Pemesanan Paket Wisata</h2>
+        <form onsubmit="return validateForm()">
+            <label for="nama">Nama Lengkap:</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="paket">Pilih Paket Wisata:</label>
+            <select id="paket" name="paket" required>
+                <option value="bali">Bali</option>
+                <option value="yogyakarta">Yogyakarta</option>
+                <option value="lombok">Lombok</option>
+            </select>
+
+            <button type="submit">Pesan Sekarang</button>
+        </form>
+    </section>
+
+    <section class="table-section">
+        <h2>Daftar Paket Wisata Populer</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Destinasi</th>
+                    <th>Harga</th>
+                    <th>Durasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bali</td>
+                    <td>Rp 3.500.000</td>
+                    <td>3 Hari 2 Malam</td>
+                </tr>
+                <tr>
+                    <td>Yogyakarta</td>
+                    <td>Rp 2.000.000</td>
+                    <td>2 Hari 1 Malam</td>
+                </tr>
+                <tr>
+                    <td>Lombok</td>
+                    <td>Rp 4.000.000</td>
+                    <td>3 Hari 2 Malam</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
