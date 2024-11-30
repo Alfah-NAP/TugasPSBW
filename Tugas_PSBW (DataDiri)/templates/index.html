@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Diri</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Data Diri</h1>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Profil</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#data-diri">Data Diri</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#daftar-nilai">Daftar Nilai</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#grafik-ipk">Grafik IPK</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#krs">KRS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#laporan-nilai">Laporan Nilai</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Data Diri Section -->
+<!-- Data Diri Section -->
+<section id="data-diri" class="mb-5">
+ <h2>Data Diri</h2>
+    <div class="card p-3 rounded text-center">
+        <!-- Foto Profil -->
+        <img src="https://tse1.mm.bing.net/th?id=OIP.9Xg_y491dkzzrfrW6RV9pQHaHa&pid=Api&P=0&h=220" alt="Foto Profil" class="img-thumbnail mx-auto d-block mb-3" 
+        style="width: 150px; height: 150px; object-fit: cover; border-radius: 5%;">   
+
+        <!-- Informasi Data Diri -->
+        <p><strong>Nama:</strong> Nepta Ardana Putra</p>
+        <p><strong>NIM:</strong> 1482300087</p>
+        <p><strong>Program Studi:</strong> Sistem Dan Teknologi Informasi</p>
+    </div>
+</section>
+
+
+        <!-- Daftar Nilai Section -->
+        <section id="daftar-nilai" class="mb-5">
+            <h2>Daftar Nilai</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Mata Kuliah</th>
+                        <th>Nilai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Pengembangan Sistem Berbasis Web</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Bahasa Indonesia</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sistem Enterprise</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Manajemen Sistem Informasi</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Hitung IPK</title>
+                <link rel="stylesheet" href="style.css">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="{{ url_for('static', filename='js/script.js') }}"></script> <!-- Memanggil file JavaScript -->
+            </head>
+            <body>
+                <h1>Hitung IPK</h1>
+            
+                <section id="grafik-ipk" class="mb-5">
+                    <h2>Grafik IPK</h2>
+                    <div class="mb-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Mata Kuliah</th>
+                                    <th>Nilai</th>
+                                    <th>SKS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="nilai-table">
+                                <tr>
+                                    <td>Pengembangan Sistem Berbasis Web</td>
+                                    <td><input type="text" class="form-control nilai" data-sks="4" value="A"></td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Bahasa Indonesia</td>
+                                    <td><input type="text" class="form-control nilai" data-sks="2" value="A"></td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Sistem Enterprise</td>
+                                    <td><input type="text" class="form-control nilai" data-sks="3" value="A"></td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>Manajemen Sistem Informasi</td>
+                                    <td><input type="text" class="form-control nilai" data-sks="3" value="A"></td>
+                                    <td>3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary" onclick="hitungIPK()">Hitung IPK</button>
+                    <h4 class="mt-3">IPK: <span id="hasil-ipk">0.00</span></h4>
+                    <canvas id="grafikIpk" height="100"></canvas>
+                </section>
+            
+                <script>
+                    function hitungIPK() {
+                        const rows = document.querySelectorAll('#nilai-table tr');
+                        let totalNilai = 0;
+                        let totalSKS = 0;
+            
+                        rows.forEach(row => {
+                            const nilaiInput = row.querySelector('.nilai').value;
+                            const sks = parseInt(row.querySelector('td:nth-child(3)').innerText);
+            
+                            // Konversi nilai huruf ke angka
+                            let nilaiAngka;
+                            switch (nilaiInput.toUpperCase()) {
+                                case 'A':
+                                    nilaiAngka = 4.0;
+                                    break;
+                                case 'B':
+                                    nilaiAngka = 3.0;
+                                    break;
+                                case 'C':
+                                    nilaiAngka = 2.0;
+                                    break;
+                                case 'D':
+                                    nilaiAngka = 1.0;
+                                    break;
+                                case 'E':
+                                    nilaiAngka = 0.0;
+                                    break;
+                                default:
+                                    nilaiAngka = 0.0; // Jika nilai tidak valid
+                            }
+            
+                            totalNilai += nilaiAngka * sks;
+                            totalSKS += sks;
+                        });
+            
+                        const ipk = totalSKS > 0 ? totalNilai / totalSKS : 0;
+                        document.getElementById('hasil-ipk').innerText = ipk.toFixed(2);
+            
+                        // Gambar grafik
+                        gambarGrafik(rows);
+                    }
+            
+                    function gambarGrafik(rows) {
+                        const ctx = document.getElementById('grafikIpk').getContext('2d');
+                        const labels = [];
+                        const data = [];
+            
+                        rows.forEach(row => {
+                            const mataKuliah = row.cells[0].innerText;
+                            const nilaiInput = row.querySelector('.nilai').value;
+                            let nilaiAngka;
+            
+                            switch (nilaiInput.toUpperCase()) {
+                                case 'A':
+                                    nilaiAngka = 4.0;
+                                    break;
+                                case 'B':
+                                    nilaiAngka = 3.0;
+                                    break;
+                                case 'C':
+                                    nilaiAngka = 2.0;
+                                    break;
+                                case 'D':
+                                    nilaiAngka = 1.0;
+                                    break;
+                                case 'E':
+                                    nilaiAngka = 0.0;
+                                    break;
+                                default:
+                                    nilaiAngka = 0.0; // Jika nilai tidak valid
+                            }
+            
+                            labels.push(mataKuliah);
+                            data.push(nilaiAngka);
+                        });
+            
+                        const grafikIpk = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Nilai',
+                                    data: data,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    }
+                </script>
+            </body>
+            </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="path/to/your/script.js"></script>
+</head>
+<body>
+    <div class="container my-5">
+       
+        <h3>Kartu Rencana Studi (KRS)</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>14823293</td>
+                    <td>Pengembangan Sistem Berbasis Web</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>000802</td>
+                    <td>Bahasa Indonesia</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>148233123</td>
+                    <td>Sistem Enterprise</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>14823032</td>
+                    <td>Manajemen Sistem Infromasi</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+        <!-- Laporan Nilai Section -->
+        <section id="laporan-nilai">
+            <h2>Laporan Nilai</h2>
+            <p>IPK: 4.00</p>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
